@@ -18,18 +18,18 @@ can create a trapezoid.
 
 % minipage side by side of Slant-Base-Slant vs. Base-Slant-Base
 \begin{figure}[h]
-            \centering
-            \begin{minipage}[t]{0.48\textwidth}
-                \vspace{0pt}
-                \includegraphics[width=1\linewidth]{maxheightsbs.jpg}
-                \caption{Slant-Base-Slant Trapezoid}
-            \end{minipage}
-            \begin{minipage}[t]{0.48\textwidth}
-                \vspace{0pt}
-                \includegraphics[width=1\linewidth]{maxheightsbs.jpg}
-                \caption{Base-Slant-Base Trapezoid}
-            \end{minipage}
-        \end{figure}
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \includegraphics[width=1\linewidth]{maxheightsbs.jpg}
+        \caption{Slant-Base-Slant Trapezoid}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \includegraphics[width=1\linewidth]{maxheightsbs.jpg}
+        \caption{Base-Slant-Base Trapezoid}
+    \end{minipage}
+\end{figure}
 
 We can either create a Slant-Base-Slant or a Base-Slant-Base trapezoid. Our
 first problem is to decide whether each case gives out a larger area. Let us 
@@ -61,7 +61,7 @@ Slant-Base-Slant triangle.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\linewidth]{maxheightsbs.jpg}
-    \end{figure}
+\end{figure}
 \begin{align*}
     s_{1} &= 8, \ a = 10, s_{2} = 12 \\
     A_{sbs} &= 8 \cdot 10 + \frac{8 \cdot (\sqrt{12^{2} - 8^{2}})}{2} \\
@@ -72,5 +72,84 @@ Slant-Base-Slant triangle.
 \end{align*}
 
 \subsection{Optimizing Slant-Base-Slant Trapezoid}
+
+Just as a sanity check, it is imperative that we define the bounding range of 
+the opposite base. If we were to collapse the two slants into a line, we would approach a 
+max base would be $30$. With the opposing argument, if we were to connect the two slants 
+into a point, our minimum base would be $0$. Using Heron's Formula, we have a "minimum" area of
+$A = \sqrt{s(s-a)(s-b)(s-c)} = \sqrt{15(15-8)(15-10)(15-12)} = 15\sqrt{7} \approx 39.7 \ \text{units}^{2}$.
+All of this information should give us a base to work with.
+
+In hindsight, I'd like to work with area function that is dependent on height. We know off the bat
+that it is restricted from $0 < x \leq 8$ from the triangle approach and from maximizing one of the 
+slant leg height. We can solve for the other base in terms of the height using the Pythagorean Theorem 
+and some substitutions. After which, we can create our area function and maximize it.
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \includegraphics[width=1\linewidth]{heightdrawing.jpg}
+        \caption{Slant-Base-Slant Trapezoid}
+    \end{minipage}
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \begin{align*}
+            & A = \frac{a+b}{2}h \\
+            & A = \frac{10 + b}{2}h, \quad b = \sqrt{64-h^{2}}+10+\sqrt{144-h^{2}} \\
+            & A(h) = \frac{10+\left(\sqrt{64-h^{2}}+10+\sqrt{144-h^{2}}\right)}{2}h, \quad 0 < h \leq 8 \\
+            & A'(h) = 10+\frac{\sqrt{64-h^{2}}}{2}-\frac{h^{2}}{2\sqrt{64-h^{2}}} \\
+            & \hspace{1.5cm} +\frac{\sqrt{144-h^{2}}}{2}-\frac{h^{2}}{2\sqrt{144-h^{2}}} \\
+            & A'(h) = 0 \Longrightarrow h_{max \ area} \approx 7.6552 \\
+            & A(h_{max \ area}) \approx 120.816 \\
+            & \Longrightarrow \boxed{\lfloor A(h_{max \ area}) \rfloor = 120}
+        \end{align*}
+    \end{minipage}
+\end{figure}
+
+
+
+We are kind of forced to use numerical methods as solving for when deriviative
+is equal to 0 would be quite the algebraic hassle. Another way would be to 
+floor the entire $A(h)$ function and simply graph values. 
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \begin{tikzpicture}
+            \begin{axis}[my style, xlabel = {$h$}, ylabel = {$A$}]
+                \addplot[domain=0:8,  samples = 100, green]{x * (10 + (sqrt(64 - x^2) + sqrt(144 - x^2)) / 2)};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Graph of \\ $A(h) = \frac{10+\left(\sqrt{64-h^{2}}+10+\sqrt{144-h^{2}}\right)}{2}h, \quad 0 < h \leq 8$}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}{|c|c|}
+        \hline
+            $h$ & $\lfloor A(h) \rfloor$ \\ \hline
+            7.0 & 117 \\ \hline
+            7.1 & 118 \\ \hline
+            7.2 & 119 \\ \hline
+            7.3 & 119 \\ \hline
+            7.4 & 120 \\ \hline
+            7.5 & 120 \\ \hline
+            7.6 & 120 \\ \hline
+            7.7 & 120 \\ \hline
+            7.8 & 120 \\ \hline
+            7.9 & 119 \\ \hline
+            8.0 & 115 \\ \hline
+        \end{tabular}
+        \caption{$h$ vs $\lfloor A(h) \rfloor$ from [7, 8]}
+    \end{minipage}
+\end{figure}
+
+To conclude, a trapezoid with consecutive sides of length 8, 10, and 12 in that order has 
+the largest possible area rounded down to the nearest integer of \boxed{$120 $\text{units}^{2}}. 
 
 \end{solution}
