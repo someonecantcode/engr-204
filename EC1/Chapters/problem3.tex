@@ -1,0 +1,77 @@
+\section{Problem 3.}
+The two distinct lines with equations $ax + y = c$ and $x + y = c$
+intersect at the point $(b - 2, 4)$.  Solve for $b + c$.
+
+\begin{solution}
+    Okay, this problem seems much easier than the previous ones. From the wording alone, it seems
+    to hint that $a$ should be arbitriary with the sole exception of the $a \neq 1$ to satisfy the 
+    distinct line requirement. Let us represent the system of equations with matrices and into a linear
+    combination of vectors.
+
+    \begin{align*}
+        ax + y &= c \\
+        x + y &= c \\
+ \Longrightarrow
+        \begin{bmatrix}
+            a & 1 \\
+            1 & 1 
+        \end{bmatrix}
+        \begin{bmatrix}
+            x \\
+            y
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            c \\
+            c
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            a \\
+            1
+        \end{bmatrix} x
+        + 
+        \begin{bmatrix}
+            1 \\
+            1
+        \end{bmatrix} y
+        &= \begin{bmatrix}
+            c \\
+            c
+        \end{bmatrix}
+    \end{align*}
+
+    Since the vectors are both linearly independent or in other
+    words the null space is the zero vector, we are guarenteed only
+    one solution when $x = 0, \ y = c$. We can show this with Column-Row factorization of the augmented matrix.
+
+    \begin{align*}
+        & 
+        \begin{bmatrix}
+            a & 1 & c \\
+            1 & 1 & c
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            a & 1 \\
+            1 & 1 
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & c
+        \end{bmatrix}
+    \end{align*}
+    
+    The factorization shows us also the row reduced echelon form which gets us an 
+    intersection point at $(0, c)$. We simply just need to match this with our given
+    intersection point with $(b-2, 4)$. 
+
+    \begin{align*}
+        & (0, c) = (b-2, 4) \\
+        & 0 = b-2 \\
+        & b = 2 \\
+        & c = 4 \\
+        \Longrightarrow & \boxed{b + c = 6}
+    \end{align*}
+
+\end{solution}
+

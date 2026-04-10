@@ -122,9 +122,10 @@ floor the entire $A(h)$ function and simply graph values.
         \begin{tikzpicture}
             \begin{axis}[my style, xlabel = {$h$}, ylabel = {$A$}]
                 \addplot[domain=0:8,  samples = 100, green]{x * (10 + (sqrt(64 - x^2) + sqrt(144 - x^2)) / 2)};
+                \addplot[domain=0:8,  samples = 800, red]{floor( x * (10 + (sqrt(64 - x^2) + sqrt(144 - x^2)) / 2))};
             \end{axis}
         \end{tikzpicture}
-        \caption{Graph of \\ $A(h) = \frac{10+\left(\sqrt{64-h^{2}}+10+\sqrt{144-h^{2}}\right)}{2}h, \quad 0 < h \leq 8$}
+        \caption{Graph of both normal and floor functions. \\ $A(h) = \frac{10+\left(\sqrt{64-h^{2}}+10+\sqrt{144-h^{2}}\right)}{2}h, \quad 0 < h \leq 8$}
     \end{minipage}
     \hfill
     \begin{minipage}[h]{0.48\textwidth}
