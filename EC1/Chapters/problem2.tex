@@ -1,0 +1,39 @@
+\section{Problem 2.}
+
+Each member of a group of $6$ people is either a knight (who always tells the truth), or a knave (who always lies).  
+The first person says, “There is at least one knave in this group,” and the nth person ($2 \leq n \leq 6$) says that there are at least n knaves in the group. 
+How many knaves are there?
+
+\begin{solution}
+    These logic problems usually emerges a pattern with higher iterations. I like to
+    start with smaller cases and to see we can build up to induction. Let us start with 
+    the case of $n=1$. We see in this odd case, it is a paradox and there is no answer.
+    Let us move on to $n=2$. We start at the person who says the largest $n$ is a knave.
+    Logically, if $n$ are a knave, that would also have to include itself which would be 
+    the truth which would be a contradiction. Therefore, the $n$ person is a knave.
+    This would make the first person $1$ to become a knight. So an even split.
+
+    \begin{itemize}
+     \item P1: at least 1 knave $\longrightarrow$ knight
+     \item P2: at least 2 knaves $\longrightarrow$ knave
+   \end{itemize}
+
+   If we were to up the $n$, we would see this pattern repeat. In whole, the pattern is to work from the largest $n$ which results in a knave,
+   then go to the smallest $1$ which is a knight. Then, loop back to largest which
+   is $n-1$ which results in a knave and the smallest $2$ which is a knight. We continually
+   loop back and this either results in a paradox (n is odd) or an even split of 
+   knights and knaves at the halfway point (n is even). This brings up a good point to the 
+   paradoxical odd $n$ case as we can say that the $\left\lceil \frac{n}{2} \right\rceil$ person is 
+   both half knave and half knight. 
+   
+   Here is our solution then.
+   \begin{align*}
+        Knaves(n) &=  
+        \begin{cases}
+			DNE, & n \equiv 1 \pmod{2} \\
+            \frac{n}{2}, & n \equiv 0 \pmod{2}
+		 \end{cases}, \ n \in \mathbb{N} \\
+        \Longrightarrow & \boxed{Knaves(6) = 3}
+   \end{align*}
+   
+\end{solution}
