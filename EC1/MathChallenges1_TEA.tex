@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+\usepackage{pgfplots, tikz, cancel, framed, hyperref}
+\usepackage{mathrsfs, mdframed, enumitem}
+% tlmgr install jknapltx rsfs zref needspace
+
+\graphicspath{{./Images}}
+
+
+% \geometry{margin=1in}
+\usepackage[left=.75in, right=.75in, top=0.75in, bottom=1in]{geometry}
+\pgfplotsset{compat=1.18}
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+\newtheoremstyle{solution}
+  {15pt}
+  {15pt}
+  {}
+  {}
+  {\bfseries}
+  {: }
+  { }
+  {}
+
+\theoremstyle{solution}
+\newtheorem*{solution}{SOLUTION}
+
+\newtheoremstyle{boldcaps}
+  {15pt}
+  {15pt}
+  {}
+  {0pt}
+  {\bfseries}
+  {: }
+  {0.5em}
+  {}
+
+\theoremstyle{boldcaps}
+\newtheorem{definition}{DEFINITION}
+
+\newenvironment{boxeddefinition}
+  {\begin{mdframed}\begin{definition}}
+  {\end{definition}\end{mdframed}}
+
+\theoremstyle{boldcaps}
+\newtheorem{theorem}{THEOREM}[section]
+
+\newenvironment{boxedtheorem}
+  {\begin{mdframed}\begin{theorem}}
+  {\end{theorem}\end{mdframed}}
+
+\usetikzlibrary{calc,shapes}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+\pgfmathdeclarefunction{erf}{1}{%
+  \pgfmathparse{(2/sqrt(pi))*((#1) - ((#1)^3)/3 + ((#1)^5)/10 - ((#1)^7)/42 + ((#1)^9)/216)}%
+}
+
+
+\pgfmathdeclarefunction{erfi}{1}{%
+  \pgfmathparse{(2/sqrt(pi))*((#1) + ((#1)^3)/3 + ((#1)^5)/10 + ((#1)^7)/42 + ((#1)^9)/216)}%
+}
+
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$} }}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+% ------------------------------------------------------------
+
+\title{E.C. - Math challenge \#1 \\ ENGR\& 204 \#17385}
+\author{Brendan Tea}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\input{Chapters/problem1.tex}
+% %------------------------------------------------------%
+% \include{Chapters/Section72.tex}
+% %-------------------------------------------------%
+% \include{Chapters/Section73.tex}
+
+\end{document}
