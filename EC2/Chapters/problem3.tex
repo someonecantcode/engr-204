@@ -23,21 +23,60 @@ First let us define the intervals.
 \end{align*}
 
 Now let us create our function using summations.
-\begin{equation*}
-    C(x) = 2\pi r_{in}+\sum_{n=1}^{x}2\pi\left(r_{in}+n\frac{r_{\text{range}}}{x+1}\right), \ x \in \mathbb{N}
-\end{equation*}
+\begin{align*}
+    C(x)_{\text{discrete}} &= 2\pi r_{in} +\sum_{n=1}^{x}2\pi\left(r_{in}+n\frac{r_{\text{range}}}{x+1}\right), \ x \in \mathbb{N} \\
+    C(x)_{\text{discrete}} &= 2\pi r_{in} + \sum_{n=1}^{x}\left(2\pi r_{in}\right)+\sum_{n=1}^{x}\left(2\pi n\frac{r_{ange}}{x+1}\right) \\
+    C_{\text{cts}} &= 2\pi r_{in} + 2\pi r_{in}x + 2\pi \frac{r_{ange}}{x+1}\sum_{n=1}^{x}\left(n\right) \\
+    C_{\text{cts}} &= 2\pi r_{in} + 2\pi r_{in}x + \cancel{2}\pi \frac{r_{ange}}{\cancel{x+1}}\left(\frac{x\cancel{\left(x+1\right)}}{\cancel{2}}\right) \\
+    C_{\text{cts}} &= 2\pi r_{in} + 2\pi r_{in}x + \pi r_{ange} x
+\end{align*}
 
 With this, we just need to solve for when the function $C(x)$ is equal to 
 the total wrapping of 120 sheets of 10.4” length string.
 
+\newpage
+% mini page graph 
+% f\left(x\right)=2\pi r_{in}+\sum_{n=1}^{x}2\pi\left(r_{in}+n\frac{r_{ange}}{x+1}\right)
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \begin{tikzpicture}
+            \begin{axis}[my style]
+            \addplot[domain=100:120,  samples = 100, thick, blue] {2 * pi * (0.875 * (1 + x) + (1.625 * x) / 2)};
+            \addplot[domain=100:120,  samples = 10, thick, red] {1248};
+            \draw [black, thick] (axis cs:117.1854, \pgfkeysvalueof{/pgfplots/ymin}) 
+            -- (axis cs:117.1854, \pgfkeysvalueof{/pgfplots/ymax})
+            node[pos=0.5, left] {$x \approx 117.185403839$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Graph of discrete subdivision versus circumference function from $100 \leq x \leq 120$.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[h]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{align*}
+            & SA = 120 \cdot 10.4 = 1248 \\\\
+            & C(x)_{\text{cts}} = 1248 \\
+            & x \approx 117.185403839 \\\\
+            & C(x)_{\text{discrete}} = 1248 \\
+            & x \approx 116.61291
+        \end{align*}
+    \end{minipage}
+\end{figure}
+
+Graphing this out results in two answers with a total subdivision of $x_{\text{discrete}} \approx 116.61291, x_{\text{cts}} \approx 117.185403839 \ $. 
+Since subdivisions can only be natural numbers, we round up the discrete which makes $x_{\text{discrete}} = 117$. This gets us an approximate thickness of
+from dividing the range over the subdivisions.
+
 \begin{align*}
-    & 120 \cdot 10.4 = 1248 \\
- \Longrightarrow   & C(x) = 1248
+    & \frac{r_{\text{range}}}{x} \\
+    & \boxed{t_{\text{discrete}} = 0.013\overline{8} \ \text{inches}} \\
+    & \boxed{t_{\text{cts}} \approx 0.013867 \ \text{inches}} 
 \end{align*}
 
-Graphing this out results in $x \approx 116.61291$. Since subdivisions can only be 
-natural numbers, we round up which makes $x = 117$. This gets us an approximate thickness of
-$\frac{r_{\text{range}}}{117} = \boxed{0.013\overline{8}”}$.
 
 Comparing this to the volumne thickness method, 
 I want to test and compare the wrapping answer the thickness volume method. 
@@ -51,7 +90,7 @@ Then, we will divide that by the surface area of the the 120 sheets to get our t
     120(h \cdot 10.4) \cdot t &= \left(\pi r_{\text{out}}^2 - \pi r_{\text{in}}^2\right) \cdot h  \\
     t &= \frac{\left(\pi r_{\text{out}}^2 - \pi r_{\text{in}}^2\right) \cdot \cancel{h}}{120(\cancel{h} \cdot 10.4)} \\
       &= \frac{\pi\cdot\left(2.5\right)^{2}-\pi\left(0.875\right)^{2}}{120\cdot10.4} \\
-    t &\approx \boxed{0.1381"}
+    t &\approx \boxed{0.1381 \ \text{inches}}
 \end{align*}
 
 So 2 decimal places of accuracy which matches our significant figures. Not too shabby.
