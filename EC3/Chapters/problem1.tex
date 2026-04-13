@@ -1,8 +1,53 @@
 \section{Problem 1.}
 
-A trapezoid has consecutive sides of length $8$, $10$, and $12$ in that order. 
-Find the largest possible area of such a trapezoid rounded down to the nearest integer.
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}
+        A semicircle is inscribed in a quarter circle,
+        and one of its diameter endpoints is a distance 1
+        from the center of the quarter circle, drawn below. 
+        What fraction of the quarter circle's area is contained 
+        in the semicircle?  (i.e. what fraction of the quarter circle is shaded?)
+    \end{minipage}
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}
+        \centering
+        \includegraphics[width=0.5\linewidth]{p1.png}
+        \caption{Given diagram.}
+    \end{minipage}
+\end{figure}
+
+
 
 \begin{solution}
+Something to notice is that when drawing from center of a circle to their end
+results in a tangent line to the curve. This means when we draw a line from the 
+bigger, outer circle the tangent point, it will also hit the center of the inner circle.
+With this, we can calculate the areas symbolically. Since, we're only concerned
+about the ratio or fraction, we don't actually need the exact value.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \vspace{0pt}
+        \centering
+        \includegraphics[width=0.5\linewidth]{2rp1.jpg}
+    \end{minipage}
+    \begin{minipage}[h]{0.45\textwidth}
+        \vspace{0pt}
+        \begin{align*}
+            A_{\text{big quarter}} &= \frac{\pi (\cancel{2}r)^2}{\cancel{4}} = \pi r^2 \\
+            A_{\text{small semi}} &= \frac{\pi r^{2}}{2}
+        \end{align*}
+    \end{minipage}
+\end{figure}
+
+
+Clearly, we can see that half of the big quarter circle is enclosed by the small
+semi circle.
+\begin{equation*}
+    \boxed{\frac{A_{\text{small semi}}}{A_{\text{big quarter}}} = \frac{1}{2}}
+\end{equation*}
 
 \end{solution}

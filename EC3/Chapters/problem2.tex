@@ -1,9 +1,118 @@
 \section{Problem 2.}
 
-Each member of a group of $6$ people is either a knight (who always tells the truth), or a knave (who always lies).  
-The first person says, “There is at least one knave in this group,” and the nth person ($2 \leq n \leq 6$) says that there are at least n knaves in the group. 
-How many knaves are there?
+A right triangle has a line drawn from the vertex of the right angle to the hypotenuse, making two more right angles --
+this is called the perpendicular.  This perpendicular divides the triangle into two segments that have lengths of 9 and 16 respectively. 
+Find the length of the perpendicular, and the two legs of the triangle as shown below.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\linewidth]{p2.png}
+\end{figure}
 
 \begin{solution}
+There are many ways to solving this and the easiest is probably the usage
+of similair triangles in combination with some Pythaogrean theorem. Look at
+how the altitude splits the right angle into two complementary angles. From this
+relationship, we also know that the other smaller triangle will share the same angles
+and therefore the same ratios hence similiar triangles. Using this, we can find the 
+altitude length.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}
+        Let $a$ be the altitude side $\overline{BE}$.
+        \begin{align*}
+            \frac{9}{a} &= \frac{a}{16} \\
+            (9)(16) &= a^{2} \\
+            a &= 12, \ \text{lengths are only positive.}
+        \end{align*}
+    \end{minipage}
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}
+        \centering
+        \includegraphics[width=0.5\linewidth]{labeledp2.jpg}
+        \caption{$\triangle ABC \sim \triangle AEB \sim \triangle BEC$}
+    \end{minipage}
+\end{figure}
+
+Now we can use Pythaogrean Theorem on both sides.
+\begin{align*}
+    \overline{AB}^{2} &= 9^{2} + 12^{2} \\
+    \overline{AB} &= 15 \\
+    \overline{BC}^{2} &= 16^{2} + 12^{2} \\
+    \overline{BC} &= 20
+\end{align*}
+
+In whole, these are all of our lengths. $\boxed{\overline{BE} = 12, \ \overline{AB} = 15, \ \overline{BC} = 20}$
+
+\subsection{Extra Methods}
+
+Just thought it was interesting with the variety of methods. My actual initial 
+thought was to create a system of equation and spam Pythaogrean Theorem.
+
+\begin{align*}
+    \overline{BE}^{2}+9^{2} &= \overline{AB}^{2} \\
+    \overline{BE}^{2}+16^{2} &= \overline{BC}^{2} \\
+    \overline{AB}^{2}+\overline{BC}^{2} &= 25^{2}
+\end{align*}
+
+Solving this isn't actually that bad because we can substitue all of the squared 
+varables with just another variable and then unsquare it when we are done.
+
+\begin{align*}
+    \begin{bmatrix}
+            -1 & 0 & 1 \\
+            0 & -1 & 1 \\
+            1 & 1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        \overline{AB}^{2} \\
+        \overline{BC}^{2} \\
+        \overline{BE}^{2}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        -81 \\
+        -256 \\
+        625
+    \end{bmatrix} \\
+    \begin{bmatrix}
+        \overline{AB}^{2} \\
+        \overline{BC}^{2} \\
+        \overline{BE}^{2}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        225 \\
+        400 \\
+        114
+    \end{bmatrix} \\
+    \begin{bmatrix}
+        \overline{AB} \\
+        \overline{BC} \\
+        \overline{BE}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        15 \\
+        20 \\
+        12
+    \end{bmatrix} 
+\end{align*}
+
+Another method quite literally is the exact usage of the Geometric mean theorem
+in which we can solve for the altitude.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{geothm.png}
+    \caption{From Wikipedia $h=\sqrt{pq}$.}
+\end{figure}
+
+\begin{align*}
+    h &= \sqrt{16 \cdot 9} \\
+    \Longrightarrow h &= 12 = \overline{BE}
+\end{align*}
+From which, we can simply solve for both side legs in the original method.
 
 \end{solution}
