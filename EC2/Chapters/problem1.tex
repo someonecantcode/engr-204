@@ -1,8 +1,67 @@
 \section{Problem 1.}
 
-A trapezoid has consecutive sides of length $8$, $10$, and $12$ in that order. 
-Find the largest possible area of such a trapezoid rounded down to the nearest integer.
+$(a, b, c)$ is a solution to the system of equations {$5x + 3y + z = 2$   and  $6x + 5y + 4z = 8$}.  Solve for $a + b + c$.
 
 \begin{solution}
+Since we have more parameters than equations, we will have infinite solutions that 
+are dependent on the other parameters. We can simply use linear algebra and obtain
+our solutions and sum them all together.
+
+\begin{align*}
+    & 5x + 3y + z = 2 \\
+    & 6x + 5y + 4z = 8 \\
+    & \begin{bmatrix}
+            5 & 3 & 1 & 2 \\
+            6 & 5 & 4 & 8
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+            5 & 3\\
+            6 & 5
+    \end{bmatrix}
+    \begin{bmatrix}
+            1 & 0 & -1 & 2 \\
+            0 & 1 & 2 & 4
+    \end{bmatrix} \\
+    \Longrightarrow & RREF = \begin{bmatrix}
+            1 & 0 & -1 & 2 \\
+            0 & 1 & 2 & 4 \\
+            0 & 0 & 0 & 0
+    \end{bmatrix}
+\end{align*}
+
+Another way to think of this problem is to take the row subspace and see if it includes
+the range $[1, 1, 1]$ and to find the linear combination of the rows to obtain that. For simplicity,
+let's just solve for $x, y, \text{and }z$ and sum them all up.
+
+\begin{align*}
+    & \begin{bmatrix}
+            1 & 0 & -1 & 2 \\
+            0 & 1 & 2 & 4 \\
+            0 & 0 & 0 & 0
+    \end{bmatrix} \\
+    & \begin{bmatrix}
+            x \\
+            y \\
+            z 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+            -2 \\
+            4 \\
+            0 
+    \end{bmatrix} 
+    +
+    t
+    \begin{bmatrix}
+            1 \\
+            -2 \\
+            1 
+    \end{bmatrix}, \ t \in \mathbb{R} \\
+    & x = z - 2, \ y = 4 - 2z, \ z=z \\
+    & x + y + z = \left(z-2\right) + \left(4 - 2z\right) + \left(z\right) \\
+    \Longrightarrow & \boxed{x + y + z = 2}
+\end{align*}
+
 
 \end{solution}

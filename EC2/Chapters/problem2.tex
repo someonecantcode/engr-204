@@ -1,9 +1,73 @@
 \section{Problem 2.}
 
-Each member of a group of $6$ people is either a knight (who always tells the truth), or a knave (who always lies).  
-The first person says, “There is at least one knave in this group,” and the nth person ($2 \leq n \leq 6$) says that there are at least n knaves in the group. 
-How many knaves are there?
+A and B play the following game:  A draws a chip from a bag containing 4 green and 8 red chips.  
+If the chip is green, A wins; if not, A returns the chip to the bag, and B draws a chip.  
+If the chip is red, B wins; otherwise, B returns the chip to the bag, and the alternating draws repeat.
+Find the probability that A wins the game.
 
 \begin{solution}
+For probability problems that repeat until someone wins, we must add up all 
+events until we get a converging value. Another way is to look at when it loops
+back and then all the probabilities will repeat once again. Let us first define
+the probabilities of A and B winning and failing.
+\begin{align*}
+    & P(A) = \frac{4}{12} = \frac{1}{3}, & P(A') = \frac{2}{3} = P(B) \\
+    & P(B) = \frac{8}{12} = \frac{2}{3}, & P(B') = \frac{1}{3} = P(A)
+\end{align*}
+
+Now, let us find every way A can win which are all of the odd turns: first, third,
+fifth, $\dots$, so on. So in whole, the probability of A winning is the summation 
+of the odd turns of A winning. This gives us a schematic to work with.
+
+\begin{align*}
+    P(A) = \lim_{n \to \infty} \sum_{i=0}^{n} P(A_{1+2i})
+\end{align*}
+
+On the first turn, we draw. Let us find the probability of us winning.
+
+%\underbrace{x + \cdots + x}_{n\rm\ times}^{\text{(note here)}}
+\begin{align*}
+    P(A_{1}) &= P(A) = \frac{1}{3} \\ 
+             &= \left(P(A') \cdot P(B')\right)^{0} P(A) \\
+    P(A_{3}) &= \underbrace{\left(P(A') \cdot P(B')\right)^{1}}_{\text{first and second fails}} \cdot P(A) \\
+    P(A_{5}) &= \underbrace{P(A') \cdot P(B') \cdot P(A') \cdot P(B')}_{\text{first, second, third, and fourth fails}} \cdot P(A) \\
+             &= \left(P(A') \cdot P(B')\right)^{2} \cdot P(A) \\
+    P(A_{7}) &= \left(P(A') \cdot P(B')\right)^{3} \cdot P(A) \\
+    & \vdots \\
+    P(A_{1+2i}) &= \left(P(A') \cdot P(B')\right)^{i} \cdot P(A), \ i \in \mathbb{Z}^{+}
+\end{align*}
+
+Summing this all together.
+\begin{align*}
+    P(A) &= \lim_{n \to \infty} \sum_{i=0}^{n} P(A_{1+2i}) \\
+         &= \lim_{n \to \infty} \sum_{i=0}^{n} \left(P(A') \cdot P(B')\right)^{i} \cdot P(A) \\
+         &= \lim_{n \to \infty} \sum_{i=0}^{n} \left(\frac{2}{3} \cdot \frac{1}{3}\right)^{i} \cdot \frac{1}{3} \\
+         &= \frac{1}{3} \lim_{n \to \infty} \sum_{i=0}^{n} \left(\frac{2}{9}\right)^{i} \\
+         &= \frac{1}{3} \left(\frac{1}{1-\frac{2}{9}}\right)
+\end{align*}
+
+\begin{align*}
+    P(A) &= \frac{1}{3} \left(\frac{1}{1-\frac{2}{9}}\right) \\
+         &= \frac{1}{3} \left(\frac{1}{\frac{7}{9}}\right) \\
+         &= \frac{1}{3} \cdot \frac{9}{7} \\
+         \Longrightarrow & \boxed{P(A) =  \frac{3}{7}}
+\end{align*}
+
+Another way to think about it is see that it loops everytime and 
+becomes the same probability.
+
+\begin{align*}
+    P(A_{\text{total}}) &= P(A) + \underbrace{\left(P(A') \cdot P(B')\right)}_{\text{after failing, repeats}}   P(A_{\text{total}}) \\
+    P(A_{\text{total}}) - \left(P(A') \cdot P(B')\right)  P(A_{\text{total}}) &= P(A) \\
+    P(A_{\text{total}}) \left(1 - \left(P(A') \cdot P(B')\right)\right) &= P(A) \\
+    P(A_{\text{total}})
+    &= \frac{P(A)}{1 - \left(P(A') \cdot P(B')\right)} \\
+    P(A_{\text{total}}) &= \frac{\frac{1}{3}}{1 - \left(\frac{2}{3} \cdot \frac{1}{3}\right)} \\
+                        &= \frac{\frac{1}{3}}{1 - \left(\frac{2}{9}\right)} \\
+                        &= \frac{\frac{1}{3}}{\frac{7}{9}} \\
+    P(A_{\text{total}}) &= \boxed{\frac{3}{7}}
+\end{align*} 
+
+There, we achieve the same answer of $\boxed{P(A) = \frac{3}{7}}$. \footnote{Realize that this method has a similiar form to the infinite geometric series equation. $S = \frac{a_{0}}{1-r}, \ a_{0} = P(A), \ r = P(A') \cdot P(B')$}
 
 \end{solution}

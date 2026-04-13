@@ -1,7 +1,60 @@
 \section{Problem 3.}
-The two distinct lines with equations $ax + y = c$ and $x + y = c$
-intersect at the point $(b - 2, 4)$.  Solve for $b + c$.
+
+A roll of paper towels forms a hollow cylinder with outer diameter 5”, inner diameter 1 3/4”, and height 11”.  
+If the roll contains 120 sheets 11” by 10.4” of uniform thickness with no space between adjacent sheets, 
+find the thickness of a sheet to the nearest ten-thousandth of an inch.
 
 \begin{solution}
+This reminds me of adding up onion rings of circumference to 
+obtain the area of a circle. The approach is to either think of it as 
+volumes and use the thickness surface area formula or to remove a dimension 
+and think of wrapping string around a circle with subdivisions relating to 
+the thickness. Let us go with the latter.
+
+We have a height component that is redundant. This will simplify it to basically
+a string of length 10.4” wrapped around a hollow tube until we get to the outer diameter
+of 5”. Let us now create a formula that can calculate the total unwrapped circumference
+based on summations. 
+
+First let us define the intervals.
+\begin{align*}
+    & r_{\text{range}} = \frac{5}{2} - \frac{1.75}{2} = \frac{13}{8} \\
+    & \text{interval}  = \frac{r_{\text{range}}}{\text{subdivisions}}
+\end{align*}
+
+Now let us create our function using summations.
+\begin{equation*}
+    C(x) = 2\pi r_{in}+\sum_{n=1}^{x}2\pi\left(r_{in}+n\frac{r_{\text{range}}}{x+1}\right), \ x \in \mathbb{N}
+\end{equation*}
+
+With this, we just need to solve for when the function $C(x)$ is equal to 
+the total wrapping of 120 sheets of 10.4” length string.
+
+\begin{align*}
+    & 120 \cdot 10.4 = 1248 \\
+ \Longrightarrow   & C(x) = 1248
+\end{align*}
+
+Graphing this out results in $x \approx 116.61291$. Since subdivisions can only be 
+natural numbers, we round up which makes $x = 117$. This gets us an approximate thickness of
+$\frac{r_{\text{range}}}{117} = \boxed{0.013\overline{8}”}$.
+
+Comparing this to the volumne thickness method, 
+I want to test and compare the wrapping answer the thickness volume method. 
+To start, we must calculate the volume from annulus area multiplied by the height.
+Then, we will divide that by the surface area of the the 120 sheets to get our thickness.
+
+\begin{align*}
+    V_{\text{roll}} &= \left(\pi r_{\text{out}}^2 - \pi r_{\text{in}}^2\right) \cdot h \\
+    V_{\text{sheets}} &= 120(h \cdot 10.4) \cdot t \\
+    V_{\text{sheets}} &= V_{\text{roll}} \\
+    120(h \cdot 10.4) \cdot t &= \left(\pi r_{\text{out}}^2 - \pi r_{\text{in}}^2\right) \cdot h  \\
+    t &= \frac{\left(\pi r_{\text{out}}^2 - \pi r_{\text{in}}^2\right) \cdot \cancel{h}}{120(\cancel{h} \cdot 10.4)} \\
+      &= \frac{\pi\cdot\left(2.5\right)^{2}-\pi\left(0.875\right)^{2}}{120\cdot10.4} \\
+    t &\approx \boxed{0.1381"}
+\end{align*}
+
+So 2 decimal places of accuracy which matches our significant figures. Not too shabby.
+Would say that the initial method was a bit overdone compared the volume approach.
 
 \end{solution}
