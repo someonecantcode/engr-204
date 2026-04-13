@@ -48,7 +48,7 @@ the total wrapping of 120 sheets of 10.4” length string.
             \addplot[domain=100:120,  samples = 10, thick, red] {1248};
             \draw [black, thick] (axis cs:117.1854, \pgfkeysvalueof{/pgfplots/ymin}) 
             -- (axis cs:117.1854, \pgfkeysvalueof{/pgfplots/ymax})
-            node[pos=0.5, left] {$x \approx 117.185403839$};
+            node[pos=0.5, left] {$x \approx 117.18540$};
             \end{axis}
         \end{tikzpicture}
         \caption{Graph of discrete subdivision versus circumference function from $100 \leq x \leq 120$.}
@@ -72,7 +72,7 @@ Since subdivisions can only be natural numbers, we round up the discrete which m
 from dividing the range over the subdivisions.
 
 \begin{align*}
-    & \frac{r_{\text{range}}}{x} \\
+    & t = \frac{r_{\text{range}}}{x} \\
     & \boxed{t_{\text{discrete}} = 0.013\overline{8} \ \text{inches}} \\
     & \boxed{t_{\text{cts}} \approx 0.013867 \ \text{inches}} 
 \end{align*}
